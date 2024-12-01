@@ -1,0 +1,130 @@
+body {
+    background-color: black;
+    color: white;
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .circle {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background-color: red;
+    overflow: hidden;
+    margin-bottom: 20px;
+    margin-top: 80px;
+  }
+  
+  .circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+  }
+  
+  h2 {
+    font-size: 2em;
+    white-space: nowrap; /* Prevent wrapping for the text */
+    display: flex;
+    align-items: center;
+}
+
+#dynamic-text {
+    display: inline-block;
+    color: red;
+    border-right: 3px solid white;
+    padding-right: 2px; /* Spacing between text and cursor */
+    margin-left: 10px; /* Add space between 'I'am' and the dynamic text */
+    animation: typing 3s steps(25) 1s forwards, blink 0.75s step-end infinite;
+}
+
+@keyframes typing {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+@keyframes blink {
+    50% {
+        border-color: transparent;
+    }
+}
+  
+  p {
+    font-size: 1.2em;
+    line-height: 1.5;
+    margin-bottom: 30px;
+  }
+  
+  .social-links a {
+    text-decoration: none;
+    display: inline-block;
+    margin: 0 10px;
+    transition: transform 0.3s ease, filter 0.3s ease;
+  }
+  
+  .social-links img {
+    width: 40px;
+    height: 40px;
+    transition: transform 0.3s ease, filter 0.3s ease;
+  }
+  
+  .social-links a:hover img {
+    transform: scale(1.2); /* Membesarkan saat di-hover */
+    filter: brightness(1.5); /* Kecerahan meningkat */
+  }
+  
+  
+  button {
+    background-color: brown;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  button:hover {
+    background-color: darkred;
+  }
+  
+  .home {
+    position: absolute;
+    top: 20px;
+    left: 50px;
+    text-decoration: none;
+    color: white;
+    font-size: 1.5em;
+    background-color: darkslategrey; /* Warna latar untuk active state */
+    padding: 10px 20px;
+    border-radius: 10px; /* Membuat sudut tombol membulat */
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+  
+  .home:hover {
+    transform: scale(1.2); /* Membesarkan saat di-hover */
+    background-color: brown; /* Perubahan warna latar saat di-hover */
+  }
+  
+  
