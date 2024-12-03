@@ -30,7 +30,60 @@ document.getElementById("hire-me-btn").addEventListener("click", function () {
   
   // Start with the first role
   changeText();
-  
+   
   // Change text every 6 seconds (after typing animation completes)
   setInterval(changeText, 6000);
   
+  let currentSlide = 0;
+
+    function showSlide(index) {
+      const slides = document.querySelectorAll('.slide');
+      if (index >= slides.length) {
+        currentSlide = 0;
+      } else if (index < 0) {
+        currentSlide = slides.length - 1;
+      } else {
+        currentSlide = index;
+      }
+      const slider = document.getElementById('slider');
+      slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+
+    function nextSlide() {
+      showSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+      showSlide(currentSlide - 1);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      showSlide(currentSlide);
+    });
+
+  let currentSlide2 = 0;
+
+    function showSlide2(index) {
+      const slides2 = document.querySelectorAll('.slide2');
+      if (index >= slides2.length) {
+        currentSlide2 = 0;
+      } else if (index < 0) {
+        currentSlide2 = slides2.length - 1;
+      } else {
+        currentSlide2 = index;
+      }
+      const slider2 = document.getElementById('slider2');
+      slider2.style.transform = `translateX(-${currentSlide2 * 100}%)`;
+    }
+
+    function nextSlide2() {
+      showSlide2(currentSlide2 + 1);
+    }
+
+    function prevSlide2() {
+      showSlide2(currentSlide2 - 1);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      showSlide2(currentSlide2);
+    });

@@ -1,130 +1,284 @@
+header {
+  width: 1140px;
+  max-width: 80%;
+  margin: auto;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 100;
+}
+header a {
+  color: #eee;
+  margin-right: 40px;
+}
+.home {
+  background-color: black;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+.home:hover {
+  transform: scale(1.2);
+  background-color: brown;
+}
 body {
-    background-color: black;
-    color: white;
-    font-family: sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    margin: 0;
-  }
-  
-  .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  
-  .circle {
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    background-color: red;
-    overflow: hidden;
-    margin-bottom: 20px;
-    margin-top: 80px;
-  }
-  
-  .circle img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  h1 {
-    font-size: 3em;
-    margin-bottom: 10px;
-  }
-  
-  h2 {
-    font-size: 2em;
-    white-space: nowrap; /* Prevent wrapping for the text */
-    display: flex;
-    align-items: center;
+  background-color: black;
+  color: white;
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
 }
-
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.circle {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: red;
+  overflow: hidden;
+  margin-bottom: 20px;
+  margin-top: 80px;
+}
+.circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+h1 {
+  font-size: 1em;
+  margin-bottom: 10px;
+}
+h2 {
+  font-size: 1em;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+}
+h3 {
+  margin-top: 100px;
+}
 #dynamic-text {
-    display: inline-block;
-    color: red;
-    border-right: 3px solid white;
-    padding-right: 2px; /* Spacing between text and cursor */
-    margin-left: 10px; /* Add space between 'I'am' and the dynamic text */
-    animation: typing 3s steps(25) 1s forwards, blink 0.75s step-end infinite;
+  display: inline-block;
+  color: red;
+  border-right: 3px solid white;
+  padding-right: 2px;
+  margin-left: 10px;
+  animation: typing 3s steps(25) 1s forwards, blink 0.75s step-end infinite;
 }
-
 @keyframes typing {
-    0% {
-        width: 0;
-    }
-    100% {
-        width: 100%;
-    }
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+p {
+  font-size: 1.2em;
+  line-height: 1.5;
+  margin-bottom: 30px;
+}
+.social-links a {
+  text-decoration: none;
+  display: inline-block;
+  margin: 0 10px;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+.social-links img {
+  width: 40px;
+  height: 40px;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+.social-links a:hover img {
+  transform: scale(1.2);
+  filter: brightness(1.5);
+}
+button {
+  background-color: brown;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  font-size: 1.2em;
+  cursor: pointer;
+  margin-top: 50px;
+}
+#hire-me-btn {
+  background-color: brown;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  font-size: 1.2em;
+  cursor: pointer;
+  margin-top: 20px;
+}
+#hire-me-btn:hover {
+  background-color: darkred;
 }
 
-@keyframes blink {
-    50% {
-        border-color: transparent;
-    }
+.column {
+  display: flex; /* Membuat layout sejajar secara horizontal */
+  justify-content: space-between; /* Memberi jarak antara kolom */
+  gap: 2% ; /* Jarak antar kolom */
+  max-width: 100%; /* Lebar maksimal kontainer */
+  margin-left: 20px; /* Pusatkan kontainer */
+  padding: 10px; /* Padding untuk area kontainer */
 }
-  
-  p {
-    font-size: 1.2em;
-    line-height: 1.5;
-    margin-bottom: 30px;
-  }
-  
-  .social-links a {
-    text-decoration: none;
-    display: inline-block;
-    margin: 0 10px;
-    transition: transform 0.3s ease, filter 0.3s ease;
-  }
-  
-  .social-links img {
-    width: 40px;
-    height: 40px;
-    transition: transform 0.3s ease, filter 0.3s ease;
-  }
-  
-  .social-links a:hover img {
-    transform: scale(1.2); /* Membesarkan saat di-hover */
-    filter: brightness(1.5); /* Kecerahan meningkat */
-  }
-  
-  
-  button {
-    background-color: brown;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 20px;
-    font-size: 1.2em;
-    cursor: pointer;
-    margin-top: 20px;
-  }
-  
-  button:hover {
-    background-color: darkred;
-  }
-  
-  .home {
-    position: absolute;
-    top: 20px;
-    left: 50px;
-    text-decoration: none;
-    color: white;
-    font-size: 1.5em;
-    background-color: darkslategrey; /* Warna latar untuk active state */
-    padding: 10px 20px;
-    border-radius: 10px; /* Membuat sudut tombol membulat */
-    transition: transform 0.3s ease, background-color 0.3s ease;
-  }
-  
-  .home:hover {
-    transform: scale(1.2); /* Membesarkan saat di-hover */
-    background-color: brown; /* Perubahan warna latar saat di-hover */
-  }
-  
-  
+
+/* Atur layout slider */
+.slider-container {
+  display: flex;
+  justify-content: flex-start; /* Slider berada di ujung kanan kolom kiri */
+}
+
+.slider-wrapper {
+  position: relative;
+  width: 200pc ; /* Lebar slider */
+  max-height: 100%; /* Tinggi slider */
+  overflow: hidden;
+  background-color: #ddd; /* Latar belakang untuk area slider */
+  display: flex;
+  align-items: center;
+  margin-left: 2%;
+  background-color: black;
+}
+
+.slider {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  min-width: 100%;
+  display: flex;
+  justify-content: center; /* Pusatkan gambar di dalam slide */
+  align-items: center;
+}
+
+.slide img {
+  max-width: 100%;
+  max-height: 100% auto;
+}
+
+/* Tombol navigasi */
+.prev-btn,
+.next-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.prev-btn {
+  left: 10px;
+}
+
+.next-btn {
+  right: 10px;
+}
+
+/* Paragraf kolom kanan */
+.apk1 {
+  font-size: 1.0em;
+  line-height: 1.5;
+  color: white;
+  text-align: justify; 
+  margin-left: 10px;
+}
+.apk2 {
+  font-size: 1.0em;
+  line-height: 1.5;
+  color: white;
+  text-align: justify; 
+  margin-left: 10px;
+}
+
+.column2 {
+  display: flex; /* Membuat layout sejajar secara horizontal */
+  justify-content: space-between; /* Memberi jarak antara kolom */
+  gap: 2%; /* Jarak antar kolom */
+  max-width: 100%; /* Lebar maksimal kontainer */
+  margin-left: 10px; /* Pusatkan kontainer */
+  padding: 10px; /* Padding untuk area kontainer */
+}
+
+/* Atur layout slider */
+.slider-container2 {
+  display: flex;
+  justify-content: flex-start ; /* Slider berada di ujung kanan kolom kiri */
+}
+
+.slider-wrapper2 {
+  position: relative;
+  width: 400pc ; /* Lebar slider */
+  height: auto; /* Tinggi slider */
+  overflow: hidden;
+  background-color: #ddd; /* Latar belakang untuk area slider */
+  display: flex;
+  align-items: center;
+}
+
+.slider2 {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide2 {
+  min-width: 100%;
+  display: flex;
+  justify-content: center; /* Pusatkan gambar di dalam slide */
+  align-items: center;
+}
+
+.slide2 img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* Tombol navigasi */
+.prev-btn2,
+.next-btn2 {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.prev-btn2 {
+  left: 10px;
+}
+
+.next-btn2 {
+  right: 10px;
+}
+
+/* Paragraf kolom kanan */
+.apk2 {
+  font-size: 1.2em;
+  line-height: 1.5;
+  color: white;
+
+}

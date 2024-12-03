@@ -7,30 +7,80 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="container">
+  <header>
+  <nav>
     <a href="#" class="home">Home</a>
-    <div class="circle">
-      <img src="images/ftprofil.jpg" alt="Joko's Picture">
-    </div>
-    <h1>Hello, it's Joko Suanto</h1>
-    <h2>I'am <span id="dynamic-text"></span></h2>
-    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus labore dolores esse. Odit similique doloribus tenetur doloremque, sunt commodi in ipsa repudiandae debitis deleniti blanditiis quibusdam quaerat neque asperiores ea.</p>
-    <div class="social-links">
-        <a href="https://github.com/joko" target="_blank">
-          <img src="images/github.png" alt="GitHub">
-        </a>
-        <a href="https://facebook.com/joko" target="_blank">
-          <img src="images/facebook.png" alt="GitHub">
-        </a>
-        <a href="https://x.com/joko" target="_blank">
-          <img src="images/x.png" alt="Twitter">
-        </a>
-        <a href="https://www.instagram.com/joko" target="_blank">
-          <img src="images/instagram.png" alt="Instagram">
-        </a>
-    </div>
-    <button id="hire-me-btn">Hire Me</button>
+      <a href="">Contacts</a>
+      <a href="">Info</a>
+  </nav>
+</header>
+<div class="container">
+  <div class="circle">
+    <img src="images/ftprofil.jpg" alt="Joko's Picture">
   </div>
+  <h1>Hello, it's Joko Suanto</h1>
+  <h2>I'am <span id="dynamic-text"></span></h2>
+  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus labore dolores esse. Odit similique doloribus tenetur doloremque, sunt commodi in ipsa repudiandae debitis deleniti blanditiis quibusdam quaerat neque asperiores ea.</p>
+  <div class="social-links">
+    <a href="#" target="_blank">
+      <img src="images/github.png" alt="GitHub">
+    </a>
+    <a href="#" target="_blank">
+      <img src="images/facebook.png" alt="Facebook">
+    </a>
+    <a href="#" target="_blank">
+      <img src="images/x.png" alt="Twitter">
+    </a>
+    <a href="#" target="_blank">
+      <img src="images/instagram.png" alt="Instagram">
+    </a>
+  </div>
+  <button id="hire-me-btn">Hire Me</button>
+</div>
+<h3>Beberapa Projek yang di buat</h3>
+
+<div class="column">
+  <div class="slider-wrapper">
+    <!-- Tombol navigasi -->
+    <button class="prev-btn" onclick="prevSlide()">❮</button>
+    <!-- Slider -->
+    <div class="slider" id="slider">
+      <div class="slide"><img src="images/login.png" alt="Gambar 1"></div>
+      <div class="slide"><img src="images/Onboarding1.png" alt="Gambar 2"></div>
+      <div class="slide"><img src="images/Onboarding2.png" alt="Gambar 3"></div>
+      <div class="slide"><img src="images/Onboarding3.png" alt="Gambar 4"></div>
+      <div class="slide"><img src="images/homepage.png" alt="Gambar 5"></div>
+      <div class="slide"><img src="images/detailproductpage.png" alt="Gambar 6"></div>
+    </div>
+    <button class="next-btn" onclick="nextSlide()">❯</button>
+  </div>
+  <!-- Kolom kanan: Paragraf -->
+  <p class="apk1">
+    Desain tampilan front-end aplikasi mobile Android ini dibuat menggunakan Flutter. Flutter digunakan untuk menciptakan antarmuka pengguna yang responsif dan menarik, dengan pengalaman pengguna yang mulus. Aplikasi ini menampilkan gambar dengan tombol navigasi untuk mengganti gambar, memberikan pengalaman interaktif bagi pengguna. Selain itu, aplikasi ini juga dilengkapi dengan fitur e-commerce yang memungkinkan pengguna untuk menjelajah produk, melakukan pembelian, dan menikmati pengalaman berbelanja yang mudah dan nyaman.
+</p>
+
+</div>
+<div class="column2">
+  <p class="apk2  ">
+    Website ini dibangun menggunakan Python sebagai bahasa pemrograman utama dan SQLite sebagai basis data. 
+    Dalam proses pengembangan, Python digunakan untuk mengimplementasikan algoritma analisis sentimen, 
+    sedangkan SQLite digunakan untuk menyimpan data ulasan yang dianalisis. 
+    Website ini dirancang untuk memberikan hasil analisis yang cepat dan akurat.
+</p>
+
+  <div class="slider-wrapper2">
+    <!-- Tombol navigasi -->
+    <button class="prev-btn2" onclick="prevSlide2()">❮</button>
+    <!-- Slider -->
+    <div class="slider2" id="slider2">
+      <div class="slide2"><img src="images/washome.png" alt="Gambar 11"></div>
+      <div class="slide2"><img src="images/wasadmin.png" alt="Gambar 12"></div>
+      <div class="slide2"><img src="images/wasscraping.png" alt="Gambar 13"></div>
+      <div class="slide2"><img src="images/wasanalisis.png" alt="Gambar 14"></div>
+    </div>
+    <button class="next-btn2" onclick="nextSlide2()">❯</button>
+  </div>
+</div>
   <script src="js/script.js"></script>
 </body>
 </html>
