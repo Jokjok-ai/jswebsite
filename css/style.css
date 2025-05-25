@@ -1,0 +1,41 @@
+/* Custom CSS for Typing Effect (cannot be done with Tailwind utility classes directly) */
+#dynamic-text {
+    display: inline-block;
+    border-right: 3px solid white; /* Cursor effect */
+    overflow: hidden; /* Hide overflowing text */
+    white-space: nowrap; /* Prevent text from wrapping */
+    padding-right: 2px; /* Small padding for cursor */
+    /* Animation properties applied via JS in the HTML */
+    animation: typing-tailwind 3s steps(25) forwards, blink-tailwind 0.75s step-end infinite;
+}
+
+@keyframes typing-tailwind {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blink-tailwind {
+    50% {
+        border-color: transparent; /* Make cursor disappear */
+    }
+}
+
+/* Base font-family if you want to apply it globally for Inter */
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Custom transition for slider-wrapper if not handled by Tailwind classes */
+.slider-wrapper {
+    transition: transform 0.5s ease-in-out;
+}
+
+/* Ensure slides take full width within wrapper */
+.slide {
+    min-width: 100%;
+    flex-shrink: 0; /* Prevents slides from shrinking */
+}
