@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // ---- Dynamic Text (Typing Effect) ----
     const dynamicText = document.getElementById("dynamic-text");
     const roles = [
+        "Backend Developer",
         "Junior Programmer",
         "Web Developer",
         "Mobile Developer"
@@ -44,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // ---- Hire Me Button ----
     document.getElementById("hire-me-btn").addEventListener("click", () => {
-        alert("Terima kasih atas minat Anda! Saya akan segera menghubungi Anda.");
+        alert("Terima kasih atas minat Anda! Anda bisa menghubungi saya lewat kontak di bawah.");
     });
 
     // ---- Universal Slider Functionality ----

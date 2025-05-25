@@ -39,3 +39,45 @@ body {
     min-width: 100%;
     flex-shrink: 0; /* Prevents slides from shrinking */
 }
+
+
+@keyframes rotate3D {
+    0% {
+        transform: rotateY(0deg) rotateX(0deg);
+    }
+    25% {
+        transform: rotateY(15deg) rotateX(15deg);
+    }
+    50% {
+        transform: rotateY(0deg) rotateX(0deg);
+    }
+    75% {
+        transform: rotateY(-15deg) rotateX(-15deg);
+    }
+    100% {
+        transform: rotateY(0deg) rotateX(0deg);
+    }
+}
+
+.contact-card {
+    animation: rotate3D 8s infinite ease-in-out;
+}
+
+/* Animasi Otomatis (opsional, jika Anda ingin berputar terus-menerus) */
+/* Jika ingin berputar terus, hapus :hover di atas dan ganti dengan ini: */
+/*
+
+
+/* Properti untuk mengaktifkan transformasi 3D 
+.contact-card {
+    /* Menambahkan perspektif pada parent untuk efek 3D yang benar 
+    perspective: 1000px;
+    /* Memastikan elemen ini adalah kontainer untuk transformasi 3D 
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease-in-out; /* Transisi untuk animasi halus 
+}
+
+/* Efek rotasi 3D saat hover 
+.contact-card:hover {
+    transform: rotateY(15deg) rotateX(15deg) scale(1.05); /* Sedikit rotasi dan skala */
+}
