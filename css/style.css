@@ -79,5 +79,5 @@ body {
 
 /* Efek rotasi 3D saat hover 
 .contact-card:hover {
-    transform: rotateY(15deg) rotateX(15deg) scale(1.05); /* Sedikit rotasi dan skala */
+    transform: rotateY(15deg) rotateX(15deg) scale(1.05); /* Sedikit rotasi dan skala 
 }
