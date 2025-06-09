@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAIS AI - Portofolio Joko Suanto</title>
+    <link rel="icon" type="image/png" href="images\logo-sais-green.png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/cssbackground.css"> 
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body class="bg-gray-950 text-gray-100 font-inter flex flex-col items-center min-h-screen">
+    <div id="background-container"></div>
+
+    <header class="w-full max-w-7xl mx-auto px-4 py-4 md:py-6 flex justify-between items-center sticky top-0 z-50 bg-gray-900 bg-opacity-80 backdrop-blur-md shadow-lg">
+        <a href="index.html" class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">SAIS AI</a>
+        <nav>
+            <ul class="flex space-x-6 md:space-x-8">
+                <li><a href="index.html" class="text-lg hover:text-purple-300 transition-colors duration-300">Kembali ke Portofolio</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="w-full flex-grow flex items-center justify-center py-10 px-4">
+        <section class="w-full max-w-2xl">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-center mb-8 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+                SAIS AI: Pemandu Web
+            </h1>
+            <p class="text-lg text-gray-300 text-center mb-10 max-w-3xl mx-auto leading-relaxed">
+                SAIS adalah asisten AI pribadi Anda yang dirancang untuk membantu menavigasi dan menjelaskan konten dalam portofolio ini. Tanyakan apa pun tentang proyek atau keahlian saya!
+            </p>
+
+            <div class="bg-gray-800 p-6 rounded-lg shadow-xl w-full mx-auto">
+                <div class="flex items-center mb-4">
+                    <img src="images/logo-sais-blue.png" alt="SAIS Bot Logo" class="w-20 h-20 rounded-full mr-4 border-2 border-purple-500">
+                    <h4 class="text-2xl font-semibold text-gray-200">SAIS Bot</h4>
+                </div>
+
+                <div id="chat-box" class="h-80 overflow-y-auto bg-gray-900 p-4 rounded-lg mb-4 text-gray-300 custom-scrollbar">
+                    <div class="flex items-start mb-2">
+                        <img src="images/logo-sais-blue.png" alt="SAIS Bot Logo" class="w-8 h-8 rounded-full mr-3 border border-pink-500 flex-shrink-0">
+                        <div class="bg-purple-700 text-white p-2 rounded-lg max-w-[75%]">
+                            Halo, saya SAIS, bot pemandu web ini. Ada yang bisa saya bantu?
+                        </div>
+                    </div>
+                    </div>
+
+                <div class="flex">
+                    <input type="text" id="user-input" class="flex-grow p-3 rounded-l-lg bg-gray-700 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="Ketik pertanyaanmu di sini...">
+                    <button id="send-button" class="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-r-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-colors duration-300">Kirim</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="w-full py-8 text-center bg-gray-900 text-gray-400 text-sm mt-auto">
+        <p>&copy; 2025 Joko Suanto. All rights reserved.</p>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/universal-sentence-encoder"></script>
+    
+    <script type="module" src="js/saisBot.js"></script>
+    <script src="js/loadBackground.js"></script>
+</body>
+</html>

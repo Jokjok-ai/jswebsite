@@ -1,0 +1,169 @@
+/* Custom CSS for Typing Effect (cannot be done with Tailwind utility classes directly) */
+#dynamic-text {
+    display: inline-block;
+    border-right: 3px solid white; /* Cursor effect */
+    overflow: hidden; /* Hide overflowing text */
+    white-space: nowrap; /* Prevent text from wrapping */
+    padding-right: 2px; /* Small padding for cursor */
+    /* Animation properties applied via JS in the HTML */
+    animation: typing-tailwind 3s steps(25) forwards, blink-tailwind 0.75s step-end infinite;
+}
+
+@keyframes typing-tailwind {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blink-tailwind {
+    50% {
+        border-color: transparent; /* Make cursor disappear */
+    }
+}
+
+/* Base font-family if you want to apply it globally for Inter */
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Custom transition for slider-wrapper if not handled by Tailwind classes */
+.slider-wrapper {
+    transition: transform 0.5s ease-in-out;
+}
+
+/* Ensure slides take full width within wrapper */
+.slide {
+    min-width: 100%;
+    flex-shrink: 0; /* Prevents slides from shrinking */
+}
+
+
+@keyframes rotate3D {
+    0% {
+        transform: rotateY(0deg) rotateX(0deg);
+    }
+    25% {
+        transform: rotateY(15deg) rotateX(15deg);
+    }
+    50% {
+        transform: rotateY(0deg) rotateX(0deg);
+    }
+    75% {
+        transform: rotateY(-15deg) rotateX(-15deg);
+    }
+    100% {
+        transform: rotateY(0deg) rotateX(0deg);
+    }
+}
+
+.contact-card {
+    animation: rotate3D 8s infinite ease-in-out;
+}
+
+
+/*** ***//* Style wrapper */
+.wrapper {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  z-index: 1000;
+}
+
+/* Hilangkan padding & margin default */
+.wrapper ul {
+  padding: 0;
+  margin: 0;
+}
+
+/* Style setiap item dalam list */
+.wrapper ul li {
+  list-style: none;
+  margin: 5px 0;
+}
+
+/* Style tombol sosial */
+.wrapper ul li a {
+  display: block;
+  width: 40px;
+  height: 40px;
+  background: #333;
+  color: #fff;
+  text-align: center;
+  line-height: 40px;
+  font-size: 18px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+/* Hover effect */
+.wrapper ul li a:hover {
+  background: #555;
+  transform: scale(1.2);
+}
+
+
+
+
+.tile {
+  width: 60px;
+  height: 60px;
+  background-color: #1e1e1e;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1000px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+}
+
+.tile:hover {
+  transform: rotateY(15deg) rotateX(15deg) scale(1.05);
+  box-shadow: 0 20px 30px rgba(255, 255, 255, 0.2);
+}
+
+.tile img {
+  width: 40px;
+  height: 40px;
+  transition: transform 0.3s ease;
+}
+
+.tile:hover img {
+  transform: scale(1.1);
+}
+
+.whatsapp {
+  background: radial-gradient(circle, #25d366 0%, #128c7e 100%);
+}
+
+.email {
+  background: radial-gradient(circle, #ff4081 0%, #c2185b 100%);
+}
+
+
+/*** AI ***/
+/* css/style.css (atau buat file baru jika mau) */
+
+/* Custom scrollbar untuk chat box */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #2d3748; /* bg-gray-800 */
+    border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #6b46c1; /* Warna ungu seperti gradient Anda */
+    border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #805ad5; /* Warna ungu lebih terang saat hover */
+}
