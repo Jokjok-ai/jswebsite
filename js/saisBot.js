@@ -2,16 +2,18 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js';
 import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js';
 
-document.addEventListener('DOMContentLoaded', async function () {
+document.addEventListener('DOMContentLoaded', async function() {
     const chatBox = document.getElementById('chat-box');
     const userInput = document.getElementById('user-input');
     const sendButton = document.getElementById('send-button');
 
     let encoder;
-    let knowledgeData = {};
-    let knownSentences = [];
-    let knownEmbeddings; 
+    let normalizedKnowledgeEmbeddings;
+    let knowledgeSentences = [];
+    let knowledgeResponses = {};
+    let knowledgeDefault = "Maaf, saya belum paham. Coba tanya tentang:\n- Profil Joko\n- Proyek portofolio\n- Cara menghubungi Joko\n- Tentang AI ini";
 
+    // Firebase Configuration
     const firebaseConfig = {
         apiKey: "AIzaSyDPnUlsY-QZIfPXbkrXiqOcXzrGWV7qJ14",
         authDomain: "portofolio-js.firebaseapp.com",
@@ -25,17 +27,17 @@ document.addEventListener('DOMContentLoaded', async function () {
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
-        function addMessage(sender, message) {
+
+    function addMessage(sender, message, messageId = null) {
         const messageElement = document.createElement('div');
-        messageElement.classList.add('flex', 'items-start', 'mb-2'); 
+        messageElement.classList.add('flex', 'items-start', 'mb-2');
+        if (messageId) messageElement.id = messageId;
         
         const avatarElement = document.createElement('img');
         avatarElement.classList.add('w-8', 'h-8', 'rounded-full', 'mr-3', 'flex-shrink-0');
-        // Menggunakan logika image yang lebih sesuai dengan request awal Anda (ftprofil.jpg untuk user)
-        avatarElement.src = sender === 'bot' ? 'images/logo-sais-blue.png' : 'images/person.png'; 
+        avatarElement.src = sender === 'bot' ? 'images/logo-sais-blue.png' : 'images/person.png';
         avatarElement.alt = sender === 'bot' ? 'SAIS Bot Logo' : 'User Avatar';
-        // Mengembalikan warna border seperti yang ada di kode awal
-        avatarElement.classList.add(sender === 'bot' ? 'border' : 'border', sender === 'bot' ? 'border-pink-500' : 'border-blue-500'); 
+        avatarElement.classList.add('border', sender === 'bot' ? 'border-pink-500' : 'border-blue-500');
 
         const textContentElement = document.createElement('div');
         textContentElement.classList.add('p-2', 'rounded-lg', 'max-w-[75%]');
@@ -43,19 +45,14 @@ document.addEventListener('DOMContentLoaded', async function () {
         
         if (sender === 'bot') {
             textContentElement.classList.add('bg-purple-700', 'text-white');
-        } else {
-            textContentElement.classList.add('bg-blue-600', 'text-white', 'ml-auto');
-        }
-
-        if (sender === 'bot') {
             messageElement.appendChild(avatarElement);
             messageElement.appendChild(textContentElement);
         } else {
+            textContentElement.classList.add('bg-blue-600', 'text-white', 'ml-auto');
             messageElement.classList.add('justify-end');
-            messageElement.appendChild(textContentElement);
-            // Mengubah urutan agar avatar user ada di kanan
             avatarElement.classList.remove('mr-3');
             avatarElement.classList.add('ml-3');
+            messageElement.appendChild(textContentElement);
             messageElement.appendChild(avatarElement);
         }
         
@@ -63,111 +60,119 @@ document.addEventListener('DOMContentLoaded', async function () {
         chatBox.scrollTop = chatBox.scrollHeight;
     }
 
-    function cosineSimilarity(vec1, vec2) {
-        const tensorVec1 = tf.tensor(vec1);
-        const tensorVec2 = tf.tensor(vec2);
-
-        const dotProduct = tf.sum(tf.mul(tensorVec1, tensorVec2));
-        const norm1 = tf.norm(tensorVec1);
-        const norm2 = tf.norm(tensorVec2);
-        
-        if (norm1.arraySync() === 0 || norm2.arraySync() === 0) {
-            return 0;
-        }
-
-        return tf.div(dotProduct, tf.mul(norm1, norm2)).arraySync();
-    }
-
     async function loadChatbotResources() {
         addMessage('bot', 'Memuat model AI dan data pengetahuan... Mohon tunggu.');
+        
         try {
+            // Load TensorFlow.js model
             encoder = await use.load();
-            addMessage('bot', 'Model AI berhasil dimuat!');
-
+            
+            // Load knowledge from Firestore
             const docRef = doc(db, 'chatbot-ai', 'sais-knowledge');
             const docSnap = await getDoc(docRef);
 
             if (docSnap.exists()) {
                 const data = docSnap.data();
-                knowledgeData = {
-                    responses: data.responses || {},
-                    initial_greeting: data.initial_greeting || '',
-                    default: data.default || ''
-                };
+                knowledgeResponses = data.responses || {};
+                knowledgeSentences = Object.keys(knowledgeResponses);
+                knowledgeDefault = data.default || knowledgeDefault;
                 
-                knownSentences = Object.keys(knowledgeData.responses);
-                if (knownSentences.length > 0) {
-                    knownEmbeddings = await encoder.embed(knownSentences.map(s => s.toLowerCase()));
-                    addMessage('bot', knowledgeData.initial_greeting || "Halo! Ada yang bisa saya bantu?");
-                } else {
-                    addMessage('bot', 'Data pengetahuan (pertanyaan/respons) tidak ditemukan di Firestore.');
+                // Precompute and normalize embeddings
+                if (knowledgeSentences.length > 0) {
+                    const embeddings = await encoder.embed(knowledgeSentences);
+                    normalizedKnowledgeEmbeddings = tf.div(embeddings, tf.norm(embeddings, 2, 1, true));
+                    embeddings.dispose();
                 }
-                
+
+                addMessage('bot', data.initial_greeting || "Halo! Ada yang bisa saya bantu?");
             } else {
-                addMessage('bot', 'Dokumen "sais-knowledge" tidak ditemukan di Firestore. Pastikan ada di koleksi "chatbot-ai".');
+                addMessage('bot', 'Dokumen tidak ditemukan di Firestore');
             }
         } catch (error) {
-            addMessage('bot', 'Gagal memuat sumber daya chatbot. Cek konsol browser untuk detail.');
-            console.error("Error loading chatbot resources:", error);
+            console.error("Error loading resources:", error);
+            addMessage('bot', 'Gagal memuat sumber daya. Cek konsol untuk detail.');
         }
     }
 
-    // Fungsi untuk mendapatkan respons bot berdasarkan pesan pengguna
     async function getBotResponse(userMessage) {
-        if (!encoder) {
-            return "Maaf, model AI belum siap. Mohon tunggu sebentar atau refresh halaman.";
-        }
-        if (!knownEmbeddings || knownSentences.length === 0) {
-            return "Maaf, data pengetahuan bot belum termuat atau kosong.";
+        if (!encoder || !normalizedKnowledgeEmbeddings) {
+            return "Model AI belum siap. Mohon tunggu...";
         }
 
-        const cleanedMessage = userMessage.toLowerCase().trim();
-        const userEmbedding = (await encoder.embed([cleanedMessage])).arraySync()[0];
+        try {
+            // Embed and normalize user message
+            const userEmbedding = await encoder.embed([userMessage.toLowerCase()]);
+            const normalizedUserEmbedding = tf.div(userEmbedding, tf.norm(userEmbedding));
 
-        let bestResponse = knowledgeData.default || "Maaf, saya tidak mengerti. Bisakah Anda mengulangi atau mencoba pertanyaan lain?";
-        let maxSimilarity = -1;
+            // Efficient matrix multiplication for cosine similarity
+            const similarities = tf.matMul(
+                normalizedUserEmbedding, 
+                normalizedKnowledgeEmbeddings, 
+                false, true
+            ).dataSync();
 
-        const similarityThreshold = 0.7;
-
-        for (let i = 0; i < knownSentences.length; i++) {
-            const knownSentence = knownSentences[i];
-            const currentKnownEmbedding = knownEmbeddings.slice([i, 0], [1, -1]).arraySync()[0];
-
-            const similarity = cosineSimilarity(userEmbedding, currentKnownEmbedding);
-
-            if (similarity > maxSimilarity) {
-                maxSimilarity = similarity;
-                if (similarity >= similarityThreshold) {
-                     bestResponse = knowledgeData.responses[knownSentence];
+            // Find best match
+            let bestMatchIndex = 0;
+            let maxSimilarity = -1;
+            
+            for (let i = 0; i < similarities.length; i++) {
+                if (similarities[i] > maxSimilarity) {
+                    maxSimilarity = similarities[i];
+                    bestMatchIndex = i;
                 }
             }
-        }
 
-        if (maxSimilarity < similarityThreshold) {
-            bestResponse = knowledgeData.default || "Maaf, saya belum paham. Coba tanya tentang:\n- Profil Joko\n- Proyek portofolio\n- Cara menghubungi Joko\n- Tentang AI ini";
-        }
+            // Clean up tensors
+            userEmbedding.dispose();
+            normalizedUserEmbedding.dispose();
 
-        return bestResponse;
+            // Dynamic threshold based on dataset size
+            const threshold = Math.max(0.7, 0.85 - (knowledgeSentences.length * 0.00005));
+            
+            return maxSimilarity >= threshold
+                ? knowledgeResponses[knowledgeSentences[bestMatchIndex]]
+                : knowledgeDefault;
+                
+        } catch (error) {
+            console.error("Response error:", error);
+            return "Terjadi kesalahan saat memproses permintaan Anda";
+        }
     }
 
-    sendButton.addEventListener('click', async () => {
+    async function handleUserInput() {
         const message = userInput.value.trim();
-        if (message) {
-            addMessage('user', message);
-            userInput.value = '';
+        if (!message) return;
 
-            setTimeout(async () => {
-                const botReply = await getBotResponse(message);
-                addMessage('bot', botReply); // Ubah 'sais' menjadi 'bot' agar konsisten dengan addMessage
-            }, 700);
+        addMessage('user', message);
+        userInput.value = '';
+        userInput.disabled = true;
+        sendButton.disabled = true;
+
+        // Show thinking indicator
+        const thinkingId = 'thinking-message';
+        addMessage('bot', 'SAIS sedang berpikir...', thinkingId);
+
+        try {
+            const response = await getBotResponse(message);
+            document.getElementById(thinkingId)?.remove();
+            addMessage('bot', response);
+        } catch (error) {
+            console.error("Error handling input:", error);
+            document.getElementById(thinkingId)?.remove();
+            addMessage('bot', 'Terjadi kesalahan, silakan coba lagi');
         }
-    });
 
+        userInput.disabled = false;
+        sendButton.disabled = false;
+        userInput.focus();
+    }
+
+    // Event Listeners
+    sendButton.addEventListener('click', handleUserInput);
     userInput.addEventListener('keypress', e => {
-        if (e.key === 'Enter') {
-            sendButton.click();
-        }
+        if (e.key === 'Enter') handleUserInput();
     });
 
+    // Initial load
     loadChatbotResources();
 });
