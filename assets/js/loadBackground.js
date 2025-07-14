@@ -1,4 +1,4 @@
-// js/loadBackground.js
+ // js/loadBackground.js
 
 document.addEventListener('DOMContentLoaded', function() {
     fetch('background.html') // Sesuaikan path jika background.html ada di sub-folder, misal: 'includes/background.html'
